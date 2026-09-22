@@ -60,3 +60,93 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
+
+/* ------------------------------------------------------------------
+   Shared surface + control styles.
+   Keeps every card, tile and button in the app visually identical.
+   ------------------------------------------------------------------ */
+@layer components {
+    /* Elevated container: page sections, tables, forms. */
+    .ui-card {
+        @apply overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm
+               dark:border-zinc-800 dark:bg-zinc-900;
+    }
+
+    /* Title strip at the top of a .ui-card. */
+    .ui-card-header {
+        @apply flex flex-col gap-3 border-b border-zinc-200 px-5 py-4
+               dark:border-zinc-800 sm:flex-row sm:items-center sm:justify-between sm:px-6;
+    }
+
+    .ui-card-body {
+        @apply p-5 sm:p-6;
+    }
+
+    /* Small stat / metadata tile. */
+    .ui-tile {
+        @apply rounded-xl border border-zinc-200 bg-white p-4 shadow-sm
+               transition-colors dark:border-zinc-800 dark:bg-zinc-900;
+    }
+
+    .ui-tile-label {
+        @apply text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400;
+    }
+
+    /* Hairline grid: cells sit on the divider colour with a 1px gap. */
+    .ui-grid-divider {
+        @apply gap-px bg-zinc-200 dark:bg-zinc-800;
+    }
+
+    .ui-grid-cell {
+        @apply flex flex-col items-center gap-2 bg-white p-5 dark:bg-zinc-900;
+    }
+
+    /* Buttons — one shape and motion for every action in the app. */
+    .btn-primary,
+    .btn-danger,
+    .btn-secondary {
+        @apply relative inline-flex h-11 items-center justify-center gap-2 rounded-xl
+               px-6 text-sm font-semibold transition-all duration-200
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+               disabled:pointer-events-none disabled:opacity-50 active:scale-[0.97];
+    }
+
+    .btn-primary {
+        @apply bg-emerald-600 text-white shadow-lg shadow-emerald-500/25
+               hover:bg-emerald-700 hover:shadow-emerald-500/40 focus-visible:ring-emerald-500;
+    }
+
+    .btn-danger {
+        @apply bg-red-600 text-white shadow-lg shadow-red-500/25
+               hover:bg-red-700 hover:shadow-red-500/40 focus-visible:ring-red-500;
+    }
+
+    .btn-secondary {
+        @apply border border-zinc-200 bg-white text-zinc-700 shadow-sm
+               hover:bg-zinc-50 focus-visible:ring-zinc-400
+               dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700;
+    }
+
+    /* Overlay shown by wire:loading inside a button. */
+    .btn-spinner {
+        @apply absolute inset-0 flex items-center justify-center rounded-xl;
+    }
+
+    /* Inline callout (warnings, empty-state notices). */
+    .ui-notice {
+        @apply rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-center
+               dark:border-amber-900/60 dark:bg-amber-950/30;
+    }
+}
+
+/* Softer, themed scrollbars. */
+@supports (scrollbar-width: thin) {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-zinc-300) transparent;
+    }
+
+    .dark * {
+        scrollbar-color: var(--color-zinc-700) transparent;
+    }
+}

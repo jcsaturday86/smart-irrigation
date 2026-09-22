@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+    <body class="min-h-screen bg-zinc-50 antialiased dark:bg-zinc-950">
+        <flux:sidebar sticky stashable class="border-e border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-            <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
+            <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rounded-xl p-1 transition-colors hover:bg-zinc-100 rtl:space-x-reverse dark:hover:bg-zinc-800" wire:navigate>
                 <x-app-logo />
             </a>
 
@@ -18,13 +18,21 @@
                     <flux:navlist.item icon="clock" href="/timer-irrigation" :current="request()->routeIs('timer-irrigation')" wire:navigate>{{ __('Timer Irrigation') }}</flux:navlist.item>
                     <flux:navlist.item icon="sparkles" href="/crops" :current="request()->routeIs('crops')" wire:navigate>{{ __('Automatic Irrigation') }}</flux:navlist.item>
                     <flux:navlist.item icon="users" :href="route('user-accounts')" :current="request()->routeIs('user-accounts')" wire:navigate>{{ __('User Accounts') }}</flux:navlist.item>
-                    
                 </flux:navlist.group>
-
-                
             </flux:navlist>
 
             <flux:spacer />
+
+            {{-- Connection hint --}}
+            <div class="mb-3 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2.5 dark:border-zinc-800 dark:bg-zinc-800/50">
+                <div class="flex items-center gap-2">
+                    <span class="relative flex h-2 w-2">
+                        <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                    </span>
+                    <span class="text-xs font-medium text-zinc-600 dark:text-zinc-300">{{ __('System online') }}</span>
+                </div>
+            </div>
 
             <!-- <flux:navlist variant="outline">
                 <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
@@ -83,7 +91,7 @@
         </flux:sidebar>
 
         <!-- Mobile User Menu -->
-        <flux:header class="lg:hidden">
+        <flux:header class="border-b border-zinc-200 bg-white lg:hidden dark:border-zinc-800 dark:bg-zinc-900">
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
 
             <flux:spacer />
